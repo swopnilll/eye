@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm, soft palette for Pooja Sharma Brows */
+  --color-brand-50: #fbf2ed;
+  --color-brand-100: #f5e3da;
+  --color-brand-200: #e9c9bb;
+  --color-brand-500: #bd806d;
+  --color-brand-600: #a96655;
+  --color-brand-700: #8b5144;
+  --color-brand-800: #633b34;
+  --color-brand-900: #302321;
+
+  --color-teal-50: #f8e9e2;
+  --color-teal-100: #efd4c9;
+  --color-teal-500: #c99583;
+  --color-teal-600: #a96655;
+  --color-teal-700: #8b5144;
+
+  --color-leaf-50: #f3fae6;
+  --color-leaf-100: #e4f5c3;
+  --color-leaf-500: #84cc16;
+  --color-leaf-600: #6aa812;
+
+  --color-surface: #fbf9f6;
+  --color-ink: #342c29;
+  --color-muted: #746862;
+  --color-line: #eee3dd;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(22 62 110 / 0.04), 0 8px 24px -12px rgb(22 62 110 / 0.18);
+
+  /* Motion */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-menu-in: menu-in 0.18s ease-out both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-breathe: breathe 6s ease-in-out infinite;
+  --animate-ecg: ecg 4s linear infinite;
+  --animate-pulse-dot: pulse-dot 1.4s ease-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: scale(1.18);
+      opacity: 1;
+    }
+  }
+  @keyframes ecg {
+    from {
+      stroke-dashoffset: 1200;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 rgb(20 184 166 / 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 12px rgb(20 184 166 / 0);
+    }
+  }
+}
+
+/* Scroll reveal (toggled by <Reveal>). Elements are only hidden when the
+   `js` class is present on <html> (set by an inline script in the layout), so
+   content is never invisible if JavaScript is blocked or fails to load. */
+.reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.js .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+/* Staggered hero entrance */
+.hero-in > * {
+  animation: var(--animate-fade-up);
+}
+.hero-in > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.hero-in > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.hero-in > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.hero-in > *:nth-child(5) {
+  animation-delay: 0.32s;
+}
+.hero-in > *:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+/* Subtle medical-cross dot pattern for hero backgrounds */
+.bg-cross-pattern {
+  background-image:
+    linear-gradient(rgb(11 108 182 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(11 108 182 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 70% 30%, black 20%, transparent 70%);
+}
+
+/* Card lift on hover */
+.card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px rgb(22 62 110 / 0.04), 0 18px 36px -16px rgb(22 62 110 / 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: #fbf9f6;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  /* Safety net: never allow sideways scrolling on small screens.
+     `clip` (not `hidden`) keeps position: sticky working. */
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: #302321;
+  letter-spacing: -0.015em;
+  /* Long single words (e.g. "Multidisciplinary") must never widen the layout. */
+  overflow-wrap: anywhere;
+}
+
+/* Accessible focus ring everywhere */
+:focus-visible {
+  outline: 3px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  html.js .reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Native details/summary accordion polish */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+/* Form controls */
+.field {
+  @apply block w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-muted/70 shadow-xs focus:border-brand-500;
+}
+.field-label {
+  @apply mb-1.5 block text-sm font-medium text-brand-900;
+}
+.field-hint {
+  @apply mt-1.5 text-sm text-muted;
+}
+.field-error {
+  @apply mt-1.5 text-sm font-medium text-red-700;
+}
