@@ -2,10 +2,42 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, MapPin, MessageCircle, Phone, Sparkles } from "lucide-react";
 import { site } from "@/lib/site";
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#business`,
+      name: site.name,
+      url: site.url,
+      telephone: "+61413165226",
+      description: site.description,
+      areaServed: ["Caversham, Perth, Western Australia"],
+    },
+    {
+      "@type": "Service",
+      "@id": `${site.url}/#eyebrow-shaping`,
+      name: "Eyebrow shaping",
+      serviceType: "Eyebrow shaping and brow styling",
+      description: "Personal eyebrow shaping by Pooja Sharma in Caversham, Perth.",
+      provider: { "@id": `${site.url}/#business` },
+      areaServed: "Caversham, Perth, Western Australia",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      publisher: { "@id": `${site.url}/#business` },
+      inLanguage: "en-AU",
+    },
+  ],
+};
+
 const browMoments = [
-  { number: "01", title: "Shape", caption: "A shape that suits you.", tone: "bg-[#eed6ca]" },
-  { number: "02", title: "Define", caption: "Soft, natural definition.", tone: "bg-[#dcb7a7]" },
-  { number: "03", title: "Refresh", caption: "A little lift for your day.", tone: "bg-[#c99583]" },
+  { number: "01", title: "Eyebrow shaping", caption: "A considered shape that suits your natural brows.", tone: "bg-[#eed6ca]" },
+  { number: "02", title: "Brow definition", caption: "Soft, balanced definition for your everyday look.", tone: "bg-[#dcb7a7]" },
+  { number: "03", title: "Brow styling", caption: "A personal refresh shaped around the look you want.", tone: "bg-[#c99583]" },
 ];
 
 function BrowArtwork() {
@@ -31,13 +63,19 @@ function BrowArtwork() {
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <section className="relative overflow-hidden bg-[#f7eee7]">
         <div className="pointer-events-none absolute -right-32 -top-32 size-[34rem] rounded-full bg-[#ebc9bb]/50 blur-3xl" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-9 px-5 py-8 sm:px-8 sm:py-14 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-2 lg:gap-16 lg:px-12 lg:py-16">
           <div className="order-2 pb-3 lg:order-1 lg:pb-0">
             <p className="mb-4 flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-rose-900 sm:text-xs"><Sparkles className="size-4" /> Brow care, close to home</p>
-            <h1 className="max-w-xl font-display text-[clamp(3.15rem,13vw,6.65rem)] font-medium leading-[0.9] tracking-[-0.065em] text-stone-900">Brows that feel <em className="font-normal text-rose-800">like you.</em></h1>
-            <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-stone-600 sm:mt-6 sm:text-lg">Personal brow shaping with Pooja Sharma in Caversham, Perth.</p>
+            <h1 className="max-w-xl font-display text-[clamp(3.15rem,13vw,6.65rem)] font-medium leading-[0.9] tracking-[-0.065em] text-stone-900">Eyebrow shaping, made <em className="font-normal text-rose-800">personal.</em></h1>
+            <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-stone-600 sm:mt-6 sm:text-lg">Personal brow shaping with Pooja Sharma in Caversham, Perth, Western Australia.</p>
             <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
               <Link href="/#contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-stone-900 px-5 text-sm font-medium text-white transition hover:bg-rose-900 sm:px-6">Ask about an appointment <ArrowRight className="size-4" /></Link>
               <Link href="/#services" className="inline-flex min-h-12 items-center gap-2 rounded-full border border-stone-300 px-4 text-sm font-medium text-stone-800 hover:bg-white/60 sm:px-5">Explore <ArrowDown className="size-4" /></Link>
@@ -51,7 +89,7 @@ export default function HomePage() {
 
       <section id="services" className="scroll-mt-20 bg-[#fbf9f6] px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex items-end justify-between gap-4 sm:mb-11"><div><p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-rose-800 sm:text-xs">The little details</p><h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-stone-900 sm:mt-3 sm:text-5xl">Your brow moment.</h2></div><span className="hidden text-sm text-stone-500 sm:block">Good brows, easy mornings.</span></div>
+          <div className="mb-8 flex items-end justify-between gap-4 sm:mb-11"><div><p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-rose-800 sm:text-xs">Brow services in Caversham</p><h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-stone-900 sm:mt-3 sm:text-5xl">Your brow moment.</h2></div><span className="hidden text-sm text-stone-500 sm:block">Good brows, easy mornings.</span></div>
           <div className="grid gap-3 sm:grid-cols-3 sm:gap-5">{browMoments.map((item) => <article key={item.number} className="group overflow-hidden rounded-2xl border border-[#eadfd8] bg-white transition hover:-translate-y-1 hover:shadow-xl"><div className={`relative flex aspect-[1.5] items-center justify-center overflow-hidden ${item.tone}`}><span className="absolute left-4 top-4 text-[0.65rem] tracking-[0.18em] text-stone-800/60 sm:left-5 sm:top-5">{item.number}</span><div className="h-10 w-[58%] -rotate-3 rounded-[100%] border-t-[9px] border-[#50352f] shadow-[0_-5px_0_-1px_#a97867] transition group-hover:-rotate-6 sm:h-12"/><span className="absolute bottom-4 right-4 flex size-8 items-center justify-center rounded-full bg-white/70 text-stone-800"><ArrowRight className="size-4" /></span></div><div className="p-4 sm:p-6"><h3 className="font-display text-lg font-semibold text-stone-900 sm:text-xl">{item.title}</h3><p className="mt-1 text-sm leading-6 text-stone-500">{item.caption}</p></div></article>)}</div>
           <p className="mt-4 text-xs text-stone-400">Ask Pooja which service is right for you.</p>
         </div>

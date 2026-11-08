@@ -21,30 +21,27 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.descriptor}`,
+    default: "Eyebrow Shaping in Caversham, Perth | Pooja Sharma",
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description:
+    "Looking for eyebrow shaping in Caversham, Perth? Book a personal brow shaping appointment with Pooja Sharma.",
   applicationName: site.name,
-  keywords: [
-    "eyebrow shaping Caversham",
-    "brow artist Perth",
-    "brow styling Perth",
-    "Pooja Sharma brows",
-    "brow appointments Caversham",
-    "Pooja Sharma Brows",
-  ],
+  alternates: { canonical: site.url },
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} | ${site.descriptor}`,
-    description: site.tagline,
+    url: site.url,
+    title: "Eyebrow Shaping in Caversham, Perth | Pooja Sharma",
+    description:
+      "Personal brow shaping with Pooja Sharma in Caversham, Perth, Western Australia.",
     locale: "en_AU",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.descriptor}`,
-    description: site.tagline,
+    title: "Eyebrow Shaping in Caversham, Perth | Pooja Sharma",
+    description:
+      "Personal brow shaping with Pooja Sharma in Caversham, Perth, Western Australia.",
   },
   robots: { index: true, follow: true },
 };

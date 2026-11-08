@@ -1,3 +1,6 @@
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const vercelDomain = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+
 /** Shared brand and contact information for Pooja's brow studio. */
 export const site = {
   name: "Pooja Sharma Brows",
@@ -6,7 +9,7 @@ export const site = {
   tagline: "A little shape. A lot of confidence.",
   supportingStatement: "Thoughtful brow styling, close to home in Caversham.",
   description: "Personal brow shaping by Pooja Sharma in Caversham, Perth.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  url: siteUrl ?? (vercelDomain ? `https://${vercelDomain}` : "http://localhost:3000"),
   locale: "en_AU",
   address: {
     line1: "Caversham",
